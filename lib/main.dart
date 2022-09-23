@@ -258,6 +258,14 @@ class _MyAppState extends State<MyApp> {
                               ),
 
 
+                              ElevatedButton(
+                                onPressed: () async {
+                                  MyScript script = MyScript();
+                                  script.subProcess();
+                                },
+                                child: const Text('subProcess'),
+                              ),
+
                             ],
                           ),
                         ],

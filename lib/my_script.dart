@@ -57,16 +57,11 @@ class MyScript {
     free(mouse);
   }
 
-/*
-  //----------------------------------------------------------------------------
-  void subProcess(){
-    enumerateWindows();
-    findNotepad();
-  }
 
+  //----------------------------------------------------------------------------
 
   // Callback for each window found
-  int enumWindowsProc(int hWnd, int lParam) {
+  static int enumWindowsProc(int hWnd, int lParam) {
     // Don't enumerate windows unless they are marked as WS_VISIBLE
     if (IsWindowVisible(hWnd) == FALSE) return TRUE;
 
@@ -102,7 +97,10 @@ class MyScript {
     }
   }
 
-//----------------------------------------------------------------------------
+  void subProcess(){
+    enumerateWindows();
+    findNotepad();
+  }
 
 //----------------------------------------------------------------------------
 
@@ -126,5 +124,7 @@ class MyScript {
 
 //----------------------------------------------------------------------------
 
- */
+//----------------------------------------------------------------------------
+
+
 }
