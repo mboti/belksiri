@@ -266,6 +266,22 @@ class _MyAppState extends State<MyApp> {
                                 child: const Text('subProcess'),
                               ),
 
+                              ElevatedButton(
+                                onPressed: () async {
+                                  MyScript script = MyScript();
+                                  script.findPowerPoint();
+                                },
+                                child: const Text('PowerPoint'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  MyScript script = MyScript();
+                                  script.getActiveWindow();
+                                },
+                                child: const Text('getActiveWindow'),
+                              ),
+
                             ],
                           ),
                         ],
