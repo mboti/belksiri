@@ -10,6 +10,12 @@ import 'package:belksiri/ex/diskinfo.dart';
 import 'package:belksiri/ex/dynamic_load.dart';
 import 'package:belksiri/ex/filever.dart';
 import 'package:belksiri/ex/fonts.dart';
+import 'package:belksiri/ex/gamepad.dart';
+import 'package:belksiri/ex/guid.dart';
+import 'package:belksiri/ex/hello.dart';
+import 'package:belksiri/ex/hooks.dart';
+import 'package:belksiri/ex/idispatch.dart';
+import 'package:belksiri/ex/knownfolder.dart';
 import 'package:belksiri/ex/registry.dart';
 import 'package:belksiri/ex/appcontainer.dart';
 import 'package:belksiri/ex/my_script.dart';
@@ -394,50 +400,50 @@ class _MyAppState extends State<MyApp> {
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  GamePadEx script = GamePadEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('GamePad'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  GuidEx script = GuidEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Guid'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  HelloEx script = HelloEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Hello'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  HooksEx script = HooksEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Hooks'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  IdispatchEx script = IdispatchEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Idispatch'), // attention au clean
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  KnownfolderEx script = KnownfolderEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Knownfolder'),
                               ),
 
                               ElevatedButton(
