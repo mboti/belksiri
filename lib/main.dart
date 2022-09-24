@@ -24,9 +24,16 @@ import 'package:belksiri/ex/network.dart';
 import 'package:belksiri/ex/paint.dart';
 import 'package:belksiri/ex/pipe.dart';
 import 'package:belksiri/ex/play_sound.dart';
+import 'package:belksiri/ex/process.dart';
 import 'package:belksiri/ex/registry.dart';
 import 'package:belksiri/ex/appcontainer.dart';
 import 'package:belksiri/ex/my_script.dart';
+import 'package:belksiri/ex/screenshot.dart';
+import 'package:belksiri/ex/scroll.dart';
+import 'package:belksiri/ex/serial.dart';
+import 'package:belksiri/ex/setup_api.dart';
+import 'package:belksiri/ex/shortcut.dart';
+import 'package:belksiri/ex/speech.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auto_gui/flutter_auto_gui.dart';
 
@@ -521,12 +528,59 @@ class _MyAppState extends State<MyApp> {
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  ProcessEx script = ProcessEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Process'),
                               ),
 
+                              ElevatedButton(
+                                onPressed: () async {
+                                  ScreenshotEx script = ScreenshotEx();
+                                  script.launch();
+                                },
+                                child: const Text('Screenshot'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  ScrollEx script = ScrollEx();
+                                  script.launch();
+                                },
+                                child: const Text('Scroll'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  SerialEx script = SerialEx();
+                                  script.launch();
+                                },
+                                child: const Text('Serial'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  SetupApiEx script = SetupApiEx(); // ne fonctionne pas à revoir
+                                  script.launch();
+                                },
+                                child: const Text('SetupApi'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  ShortCutEx script = ShortCutEx();
+                                  script.launch();
+                                },
+                                child: const Text('ShortCut'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  SpeechEx script = SpeechEx();
+                                  script.launch();
+                                },
+                                child: const Text('Speech'),
+                              ),
                               ElevatedButton(
                                 onPressed: () async {
                                   RegistryEx script = RegistryEx();
@@ -550,7 +604,29 @@ class _MyAppState extends State<MyApp> {
                                 },
                                 child: const Text(''),
                               ),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
 
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
                               ElevatedButton(
                                 onPressed: () async {
                                   RegistryEx script = RegistryEx();
