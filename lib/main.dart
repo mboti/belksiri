@@ -1,8 +1,12 @@
 import 'dart:math';
 
-import 'package:belksiri/my_script.dart';
+import 'package:belksiri/ex/registry.dart';
+import 'package:belksiri/ex/appcontainer.dart';
+import 'package:belksiri/ex/my_script.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auto_gui/flutter_auto_gui.dart';
+
+
 
 void main() {
   runApp(const MyApp());
@@ -280,6 +284,102 @@ class _MyAppState extends State<MyApp> {
                                   script.getActiveWindow();
                                 },
                                 child: const Text('getActiveWindow'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text('registry'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  AppContainer script = AppContainer();
+                                  script.launch();
+                                },
+                                child: const Text('AppContainer'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
                               ),
 
                             ],

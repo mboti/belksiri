@@ -112,7 +112,7 @@ class MyScript {
   void findPowerPoint() {
     //final hwnd =FindWindow(nullptr,TEXT('Présentation1 - PowerPoint'));
     //final hwnd =FindWindow(nullptr,TEXT("Outil Capture d’écran"));
-    int hwnd = 460606;
+    int hwnd = 526250;
 
     if (hwnd == 0) {
       print('No PowerPoint window found.');
@@ -133,10 +133,21 @@ class MyScript {
   void getActiveWindow() {
     final int hwnd =  GetActiveWindow();
     print('ActiveWindow ${hwnd}');
-
   }
 
   //----------------------------------------------------------------------------
+  // bool RegisterHotKey(
+  //     {required int vk, Pointer<Hwnd> hWnd, int id = 1, int fsModifiers = 0}) {
+  //   ArgumentError.checkNotNull(vk);
+  //   hWnd ??= nullptr;
+  //
+  //   final RegisterHotKeyP = dylib.lookupFunction<RegisterHotKeyC, RegisterHotKeyDart>('RegisterHotKey');
+  //
+  //   var result = RegisterHotKeyP(hWnd, id, fsModifiers, vk);
+  //   return result != 0;
+  // }
+
+
 
   //----------------------------------------------------------------------------
 
