@@ -1,5 +1,11 @@
 import 'dart:math';
 
+import 'package:belksiri/ex/bluetooth.dart';
+import 'package:belksiri/ex/bluetoothle.dart';
+import 'package:belksiri/ex/com_demo.dart';
+import 'package:belksiri/ex/commdlg.dart';
+import 'package:belksiri/ex/dialogbox.dart';
+import 'package:belksiri/ex/dialogshow.dart';
 import 'package:belksiri/ex/registry.dart';
 import 'package:belksiri/ex/appcontainer.dart';
 import 'package:belksiri/ex/my_script.dart';
@@ -304,50 +310,50 @@ class _MyAppState extends State<MyApp> {
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  BluetoothEx script = BluetoothEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Bluetooth'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  BluetoothleEx script = BluetoothleEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Bluetoothle'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  ComEx script = ComEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Com'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  CommdlgEx script = CommdlgEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Commdlg'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  DialogboxEx script = DialogboxEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Dialogbox'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  DialogshowEx script = DialogshowEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Dialogshow'),
                               ),
 
                               ElevatedButton(
