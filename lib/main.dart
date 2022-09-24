@@ -16,6 +16,8 @@ import 'package:belksiri/ex/hello.dart';
 import 'package:belksiri/ex/hooks.dart';
 import 'package:belksiri/ex/idispatch.dart';
 import 'package:belksiri/ex/knownfolder.dart';
+import 'package:belksiri/ex/midi.dart';
+import 'package:belksiri/ex/modules.dart';
 import 'package:belksiri/ex/registry.dart';
 import 'package:belksiri/ex/appcontainer.dart';
 import 'package:belksiri/ex/my_script.dart';
@@ -448,18 +450,18 @@ class _MyAppState extends State<MyApp> {
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  MidiEx script = MidiEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Midi'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  ModulesEx script = ModulesEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Modules'),
                               ),
 
                               ElevatedButton(
