@@ -1,0 +1,40 @@
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+import 'package:win32/win32.dart';
+
+typedef GetNativeSystemInfoNative = Void Function(
+    Pointer<SYSTEM_INFO> lpSystemInfo);
+typedef GetNativeSystemInfoDart = void Function(
+    Pointer<SYSTEM_INFO> lpSystemInfo);
+
+class DynamicLoadEx{
+  launch() {
+    final systemInfo = calloc<SYSTEM_INFO>();
+
+    final kernel32 = 'kernel32.dll'.toNativeUtf16();
+    final hModule = GetModuleHandle(kernel32);
+    if (hModule == NULL) throw Exception('Could not load kernel32.dll');
+    free(kernel32);
+
+    final ansi = 'GetNativeSystemInfo'.toANSI();
+    final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
+    free(ansi);
+
+    if (pGetNativeSystemInfo != nullptr) {
+      print('GetNativeSystemInfo() is available on this system.');
+      final funcGetNativeSystemInfo = pGetNativeSystemInfo
+          .cast<NativeFunction<GetNativeSystemInfoNative>>()
+          .asFunction<GetNativeSystemInfoDart>();
+
+      funcGetNativeSystemInfo(systemInfo);
+    } else {
+      print('GetNativeSystemInfo() not available on this system. '
+          'Falling back to GetSystemInfo().');
+
+      GetSystemInfo(systemInfo);
+    }
+
+    print('This system has ${systemInfo.ref.dwNumberOfProcessors} processors.');
+  }
+}

@@ -6,6 +6,10 @@ import 'package:belksiri/ex/com_demo.dart';
 import 'package:belksiri/ex/commdlg.dart';
 import 'package:belksiri/ex/dialogbox.dart';
 import 'package:belksiri/ex/dialogshow.dart';
+import 'package:belksiri/ex/diskinfo.dart';
+import 'package:belksiri/ex/dynamic_load.dart';
+import 'package:belksiri/ex/filever.dart';
+import 'package:belksiri/ex/fonts.dart';
 import 'package:belksiri/ex/registry.dart';
 import 'package:belksiri/ex/appcontainer.dart';
 import 'package:belksiri/ex/my_script.dart';
@@ -354,6 +358,174 @@ class _MyAppState extends State<MyApp> {
                                   script.launch();
                                 },
                                 child: const Text('Dialogshow'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  DiskInfoEx script = DiskInfoEx();
+                                  script.launch();
+                                },
+                                child: const Text('DiskInfo'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  DynamicLoadEx script = DynamicLoadEx();
+                                  script.launch();
+                                },
+                                child: const Text('DynamicLoad'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  FileVersionEx script = FileVersionEx();
+                                  script.launch();
+                                },
+                                child: const Text('FileVersion'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  FontsEx script = FontsEx();
+                                  script.launch();
+                                },
+                                child: const Text('Fonts'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  RegistryEx script = RegistryEx();
+                                  script.launch();
+                                },
+                                child: const Text(''),
                               ),
 
                               ElevatedButton(
