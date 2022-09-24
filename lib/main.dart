@@ -18,6 +18,12 @@ import 'package:belksiri/ex/idispatch.dart';
 import 'package:belksiri/ex/knownfolder.dart';
 import 'package:belksiri/ex/midi.dart';
 import 'package:belksiri/ex/modules.dart';
+import 'package:belksiri/ex/monitor.dart';
+import 'package:belksiri/ex/msgbox.dart';
+import 'package:belksiri/ex/network.dart';
+import 'package:belksiri/ex/paint.dart';
+import 'package:belksiri/ex/pipe.dart';
+import 'package:belksiri/ex/play_sound.dart';
 import 'package:belksiri/ex/registry.dart';
 import 'package:belksiri/ex/appcontainer.dart';
 import 'package:belksiri/ex/my_script.dart';
@@ -466,50 +472,51 @@ class _MyAppState extends State<MyApp> {
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  MonitorEx script = MonitorEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Monitor'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  MsgBoxEx script = MsgBoxEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('MsgBox'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  NetworkEx script = NetworkEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Network'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  PaintEx script = PaintEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Paint'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
-                                  script.launch();
+                                  List<String> list = ["powerpoint", "test"];
+                                  PipeEx script = PipeEx();
+                                  script.launch(list);
                                 },
-                                child: const Text(''),
+                                child: const Text('Pipe'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  PlaySoundEx script = PlaySoundEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('PlaySound'),
                               ),
 
                               ElevatedButton(
