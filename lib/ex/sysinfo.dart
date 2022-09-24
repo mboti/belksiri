@@ -269,39 +269,41 @@ String getUserName() {
   }
 }
 
-void main() {
-  print('This version of Windows supports the APIs in:');
-  if (isWindowsXPOrGreater()) print(' - Windows XP');
-  if (isWindowsVistaOrGreater()) print(' - Windows Vista');
-  if (isWindows7OrGreater()) print(' - Windows 7');
-  if (isWindows8OrGreater()) print(' - Windows 8');
+class SysinfoEx{
+  launch() {
+    print('This version of Windows supports the APIs in:');
+    if (isWindowsXPOrGreater()) print(' - Windows XP');
+    if (isWindowsVistaOrGreater()) print(' - Windows Vista');
+    if (isWindows7OrGreater()) print(' - Windows 7');
+    if (isWindows8OrGreater()) print(' - Windows 8');
 
-  // For more recent versions of Windows, Microsoft strongly recommends that
-  // developers avoid version testing because of app compat issues caused by
-  // buggy version testing. Indeed, the API goes to some lengths to make it hard
-  // to test versions. Yet version detection is the only reliable solution for
-  // certain API calls, so the recommendation is noted but not followed.
-  final buildNumber = int.parse(getRegistryValue(
-      HKEY_LOCAL_MACHINE,
-      'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
-      'CurrentBuildNumber') as String);
-  if (buildNumber >= 10240) print(' - Windows 10');
-  if (buildNumber >= 22000) print(' - Windows 11');
+    // For more recent versions of Windows, Microsoft strongly recommends that
+    // developers avoid version testing because of app compat issues caused by
+    // buggy version testing. Indeed, the API goes to some lengths to make it hard
+    // to test versions. Yet version detection is the only reliable solution for
+    // certain API calls, so the recommendation is noted but not followed.
+    final buildNumber = int.parse(getRegistryValue(
+        HKEY_LOCAL_MACHINE,
+        'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
+        'CurrentBuildNumber') as String);
+    if (buildNumber >= 10240) print(' - Windows 10');
+    if (buildNumber >= 22000) print(' - Windows 11');
 
-  print('\nWindows build number is: $buildNumber');
+    print('\nWindows build number is: $buildNumber');
 
-  print('\nRAM physically installed on this computer: '
-      '${getSystemMemoryInMegabytes()}MB');
+    print('\nRAM physically installed on this computer: '
+        '${getSystemMemoryInMegabytes()}MB');
 
-  print('\nActive processors on the system: '
-      '${GetActiveProcessorCount(ALL_PROCESSOR_GROUPS)}\n');
+    print('\nActive processors on the system: '
+        '${GetActiveProcessorCount(ALL_PROCESSOR_GROUPS)}\n');
 
-  print('User name is: ${getUserName()}');
-  print('Computer name is: ${getComputerName()}\n');
+    print('User name is: ${getUserName()}');
+    print('Computer name is: ${getComputerName()}\n');
 
-  printPowerInfo();
+    printPowerInfo();
 
-  print('');
+    print('');
 
-  printBatteryStatusInfo();
+    printBatteryStatusInfo();
+  }
 }

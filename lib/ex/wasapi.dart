@@ -79,102 +79,105 @@ void check(int hr) {
   if (FAILED(hr)) throw WindowsException(hr);
 }
 
-void main() {
-  // Initialize COM
-  check(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED));
+class WasapiEx{
+  launch() {
+    // Initialize COM
+    check(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED));
 
-  // Retrieve the default audio output device.
-  final pDeviceEnumerator = MMDeviceEnumerator.createInstance();
-  final ppDevice = calloc<Pointer<COMObject>>();
-  check(pDeviceEnumerator.getDefaultAudioEndpoint(
-      0, // dataflow: rendering device
-      0, // role: system notification sound
-      ppDevice));
-  pDeviceEnumerator.release();
-  free(pDeviceEnumerator.ptr);
+    // Retrieve the default audio output device.
+    final pDeviceEnumerator = MMDeviceEnumerator.createInstance();
+    final ppDevice = calloc<Pointer<COMObject>>();
+    check(pDeviceEnumerator.getDefaultAudioEndpoint(
+        0, // dataflow: rendering device
+        0, // role: system notification sound
+        ppDevice));
+    pDeviceEnumerator.release();
+    free(pDeviceEnumerator.ptr);
 
-  // Activate an IAudioClient interface for the output device.
-  final pDevice = IMMDevice(ppDevice.cast());
-  final iidAudioClient = convertToIID(IID_IAudioClient);
-  final ppAudioClient = calloc<Pointer<COMObject>>();
-  check(pDevice.activate(iidAudioClient, CLSCTX_ALL, nullptr, ppAudioClient));
-  free(iidAudioClient);
-  final pAudioClient = IAudioClient(ppAudioClient.cast());
+    // Activate an IAudioClient interface for the output device.
+    final pDevice = IMMDevice(ppDevice.cast());
+    final iidAudioClient = convertToIID(IID_IAudioClient);
+    final ppAudioClient = calloc<Pointer<COMObject>>();
+    check(pDevice.activate(iidAudioClient, CLSCTX_ALL, nullptr, ppAudioClient));
+    free(iidAudioClient);
+    final pAudioClient = IAudioClient(ppAudioClient.cast());
 
-  // Initialize the audio stream.
-  final ppFormat = calloc<Pointer<WAVEFORMATEX>>();
-  check(pAudioClient.getMixFormat(ppFormat));
-  final pWaveFormat = ppFormat.value;
-  final sampleRate = pWaveFormat.ref.nSamplesPerSec;
-  check(pAudioClient.initialize(
-      AUDCLNT_SHAREMODE.AUDCLNT_SHAREMODE_SHARED,
-      0,
-      30000, // buffer capacity of 3s (30,000 * 100ns)
-      0,
-      ppFormat.value,
-      nullptr));
+    // Initialize the audio stream.
+    final ppFormat = calloc<Pointer<WAVEFORMATEX>>();
+    check(pAudioClient.getMixFormat(ppFormat));
+    final pWaveFormat = ppFormat.value;
+    final sampleRate = pWaveFormat.ref.nSamplesPerSec;
+    check(pAudioClient.initialize(
+        AUDCLNT_SHAREMODE.AUDCLNT_SHAREMODE_SHARED,
+        0,
+        30000, // buffer capacity of 3s (30,000 * 100ns)
+        0,
+        ppFormat.value,
+        nullptr));
 
-  // Activate an IAudioRenderClient interface.
-  final iidAudioRenderClient = convertToIID(IID_IAudioRenderClient);
-  final ppAudioRenderClient = calloc<Pointer<COMObject>>();
-  check(pAudioClient.getService(iidAudioRenderClient, ppAudioRenderClient));
-  free(iidAudioRenderClient);
-  final pAudioRenderClient = IAudioRenderClient(ppAudioRenderClient.cast());
+    // Activate an IAudioRenderClient interface.
+    final iidAudioRenderClient = convertToIID(IID_IAudioRenderClient);
+    final ppAudioRenderClient = calloc<Pointer<COMObject>>();
+    check(pAudioClient.getService(iidAudioRenderClient, ppAudioRenderClient));
+    free(iidAudioRenderClient);
+    final pAudioRenderClient = IAudioRenderClient(ppAudioRenderClient.cast());
 
-  // Grab the entire buffer for the initial fill operation.
-  final bufferFrameCount = getBufferFrameCount(pAudioClient);
-  print("Buffer Size = $bufferFrameCount frames");
-  final pData = calloc<Pointer<BYTE>>();
-  check(pAudioRenderClient.getBuffer(bufferFrameCount, pData));
+    // Grab the entire buffer for the initial fill operation.
+    final bufferFrameCount = getBufferFrameCount(pAudioClient);
+    print("Buffer Size = $bufferFrameCount frames");
+    final pData = calloc<Pointer<BYTE>>();
+    check(pAudioRenderClient.getBuffer(bufferFrameCount, pData));
 
-  // Load the initial data into the shared buffer.
-  initData(pWaveFormat.ref, bufferFrameCount);
-  var dataLoaded =
-      fillMemoryBuffer(bufferFrameCount, pData.value, pWaveFormat.ref);
-  check(pAudioRenderClient.releaseBuffer(bufferFrameCount,
-      dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT));
-
-  // Calculate the actual duration of the allocated buffer.
-  final hnsActualDuration = refTimesPerSecond * bufferFrameCount / sampleRate;
-
-  check(pAudioClient.start()); // Start playing.
-
-  final pNumFramesPadding = calloc<UINT32>();
-  while (dataLoaded) {
-    // Sleep for half the buffer duration.
-    Sleep(hnsActualDuration / refTimesPerMillisecond ~/ 2);
-    // See how much buffer space is available.
-    check(pAudioClient.getCurrentPadding(pNumFramesPadding));
-    final numFramesAvailable = bufferFrameCount - pNumFramesPadding.value;
-    // Grab all the available space in the shared buffer.
-    check(pAudioRenderClient.getBuffer(numFramesAvailable, pData));
-    // Get next half second of data from the audio source.
-    dataLoaded =
-        fillMemoryBuffer(numFramesAvailable, pData.value, pWaveFormat.ref);
-    check(pAudioRenderClient.releaseBuffer(numFramesAvailable,
+    // Load the initial data into the shared buffer.
+    initData(pWaveFormat.ref, bufferFrameCount);
+    var dataLoaded =
+    fillMemoryBuffer(bufferFrameCount, pData.value, pWaveFormat.ref);
+    check(pAudioRenderClient.releaseBuffer(bufferFrameCount,
         dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT));
+
+    // Calculate the actual duration of the allocated buffer.
+    final hnsActualDuration = refTimesPerSecond * bufferFrameCount / sampleRate;
+
+    check(pAudioClient.start()); // Start playing.
+
+    final pNumFramesPadding = calloc<UINT32>();
+    while (dataLoaded) {
+      // Sleep for half the buffer duration.
+      Sleep(hnsActualDuration / refTimesPerMillisecond ~/ 2);
+      // See how much buffer space is available.
+      check(pAudioClient.getCurrentPadding(pNumFramesPadding));
+      final numFramesAvailable = bufferFrameCount - pNumFramesPadding.value;
+      // Grab all the available space in the shared buffer.
+      check(pAudioRenderClient.getBuffer(numFramesAvailable, pData));
+      // Get next half second of data from the audio source.
+      dataLoaded =
+          fillMemoryBuffer(numFramesAvailable, pData.value, pWaveFormat.ref);
+      check(pAudioRenderClient.releaseBuffer(numFramesAvailable,
+          dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT));
+    }
+    free(pNumFramesPadding);
+
+    // Wait for last data in buffer to play before stopping.
+    Sleep(hnsActualDuration / refTimesPerMillisecond ~/ 2);
+    check(pAudioClient.stop()); // Stop playing.
+
+    // Clear up
+    free(pData);
+
+    pDevice.release();
+    free(ppDevice);
+
+    pAudioClient.release();
+    free(ppAudioClient);
+
+    pAudioRenderClient.release();
+    free(ppAudioRenderClient);
+
+    free(ppFormat);
+
+    // Uninitialize COM now that we're done with it.
+    CoUninitialize();
+    print('All done!');
   }
-  free(pNumFramesPadding);
-
-  // Wait for last data in buffer to play before stopping.
-  Sleep(hnsActualDuration / refTimesPerMillisecond ~/ 2);
-  check(pAudioClient.stop()); // Stop playing.
-
-  // Clear up
-  free(pData);
-
-  pDevice.release();
-  free(ppDevice);
-
-  pAudioClient.release();
-  free(ppAudioClient);
-
-  pAudioRenderClient.release();
-  free(ppAudioRenderClient);
-
-  free(ppFormat);
-
-  // Uninitialize COM now that we're done with it.
-  CoUninitialize();
-  print('All done!');
 }
+

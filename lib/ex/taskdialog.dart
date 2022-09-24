@@ -14,6 +14,11 @@
 // as the manifest and then when you run this it should display two task dialog
 // samples.
 
+
+
+//      C:\Users\ymbi7301\AndroidStudioProjects\belksiri\lib\ex> dart compile exe taskdialog.dart
+
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -96,8 +101,7 @@ void showCustomTaskDialog() {
     ..ref.cbSize = sizeOf<TASKDIALOGCONFIG>()
     ..ref.pszWindowTitle = TEXT('TaskDialogIndirect Sample')
     ..ref.pszMainInstruction = TEXT('Which pill will you take?')
-    ..ref.pszContent =
-        TEXT('This is your last chance. There is no turning back.')
+    ..ref.pszContent = TEXT('This is your last chance. There is no turning back.')
     ..ref.hMainIcon = TD_WARNING_ICON.address
     ..ref.pszCollapsedControlText = TEXT('See more details.')
     ..ref.pszExpandedControlText = matrixDescription.toNativeUtf16()
@@ -118,7 +122,17 @@ void showCustomTaskDialog() {
   }
 }
 
-void main() {
-  showSimpleTaskDialog();
-  showCustomTaskDialog();
+
+
+// Requires a reference to comctl32.dll v6 in the manifest to work
+class TaskDialogEx{
+  launch() {
+    showSimpleTaskDialog();
+    showCustomTaskDialog();
+  }
+}
+
+void main(){
+  TaskDialogEx t = TaskDialogEx();
+  t.launch();
 }

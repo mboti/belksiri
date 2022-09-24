@@ -100,24 +100,27 @@ int runCommand(String distributionName, String command) {
   }
 }
 
-void main() {
-  print('WSL distributions registered:');
-  for (final distributionName in ['Ubuntu', 'Debian', 'kali-linux']) {
-    if (isDistributionRegistered(distributionName)) {
-      final config = getDistributionConfiguration(distributionName);
-      print('Distribution: $distributionName');
-      print('Version: ${config.wslVersion}');
-      final driveMounting = config.flags &
-              WSL_DISTRIBUTION_FLAGS
-                  .WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING ==
-          WSL_DISTRIBUTION_FLAGS.WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING;
-      print('Windows drives automatically mounted: $driveMounting');
-      print('Environment variables: ');
-      config.environmentVariables.forEach(print);
+class WslEx{
+  launch() {
+    print('WSL distributions registered:');
+    for (final distributionName in ['Ubuntu', 'Debian', 'kali-linux']) {
+      if (isDistributionRegistered(distributionName)) {
+        final config = getDistributionConfiguration(distributionName);
+        print('Distribution: $distributionName');
+        print('Version: ${config.wslVersion}');
+        final driveMounting = config.flags &
+        WSL_DISTRIBUTION_FLAGS
+            .WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING ==
+            WSL_DISTRIBUTION_FLAGS.WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING;
+        print('Windows drives automatically mounted: $driveMounting');
+        print('Environment variables: ');
+        config.environmentVariables.forEach(print);
 
-      print('Test command (uname -a) reports:');
-      final exitCode = runCommand(distributionName, 'uname -a');
-      print('Command returned exit code: $exitCode');
+        print('Test command (uname -a) reports:');
+        final exitCode = runCommand(distributionName, 'uname -a');
+        print('Command returned exit code: $exitCode');
+      }
     }
   }
 }
+

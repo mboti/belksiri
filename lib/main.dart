@@ -34,6 +34,14 @@ import 'package:belksiri/ex/serial.dart';
 import 'package:belksiri/ex/setup_api.dart';
 import 'package:belksiri/ex/shortcut.dart';
 import 'package:belksiri/ex/speech.dart';
+import 'package:belksiri/ex/sysinfo.dart';
+import 'package:belksiri/ex/taskdialog.dart';
+import 'package:belksiri/ex/vt.dart';
+import 'package:belksiri/ex/wallpaper.dart';
+import 'package:belksiri/ex/wasapi.dart';
+import 'package:belksiri/ex/wmi_perf.dart';
+import 'package:belksiri/ex/wmi_wql.dart';
+import 'package:belksiri/ex/wsl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auto_gui/flutter_auto_gui.dart';
 
@@ -583,64 +591,64 @@ class _MyAppState extends State<MyApp> {
                               ),
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  SysinfoEx script = SysinfoEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('Sysinfo'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  TaskDialogEx script = TaskDialogEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('TaskDialog'), // à revoir problème avec le fichier manifest
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  VtEx script = VtEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('VtEx'),
                               ),
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  WallpaperEx script = WallpaperEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
-                              ),
-
-                              ElevatedButton(
-                                onPressed: () async {
-                                  RegistryEx script = RegistryEx();
-                                  script.launch();
-                                },
-                                child: const Text(''),
+                                child: const Text('WallpaperEx'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  WasapiEx script = WasapiEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
-                              ),
-                              ElevatedButton(
-                                onPressed: () async {
-                                  RegistryEx script = RegistryEx();
-                                  script.launch();
-                                },
-                                child: const Text(''),
+                                child: const Text('Wasapi'),
                               ),
 
                               ElevatedButton(
                                 onPressed: () async {
-                                  RegistryEx script = RegistryEx();
+                                  WmiPerfEx script = WmiPerfEx();
                                   script.launch();
                                 },
-                                child: const Text(''),
+                                child: const Text('WmiPerfEx'),
+                              ),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  WmiWqlEx script = WmiWqlEx(); // fonctionne pas
+                                  script.launch();
+                                },
+                                child: const Text('WmiWqlEx'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  WslEx script = WslEx();
+                                  script.launch();
+                                },
+                                child: const Text('WslEx'),
                               ),
 
                               ElevatedButton(

@@ -2,6 +2,12 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+
+
+// PS C:\Users\ymbi7301\AndroidStudioProjects\belksiri\lib\ex> dart compile exe update_resource.dart
+
+
+
 /// Updates a Dart executable with a manifest.
 
 import 'dart:io';

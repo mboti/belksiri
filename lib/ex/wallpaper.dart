@@ -55,21 +55,24 @@ void printBackgroundColor() {
   }
 }
 
-void main() {
-  final hr = CoInitializeEx(
-      nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+class WallpaperEx{
+  launch() {
+    final hr = CoInitializeEx(
+        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
-  }
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    }
 
-  wallpaper = DesktopWallpaper.createInstance();
+    wallpaper = DesktopWallpaper.createInstance();
 
-  try {
-    printWallpaper();
-    printBackgroundColor();
-  } finally {
-    free(wallpaper.ptr);
-    CoUninitialize();
+    try {
+      printWallpaper();
+      printBackgroundColor();
+    } finally {
+      free(wallpaper.ptr);
+      CoUninitialize();
+    }
   }
 }
+
