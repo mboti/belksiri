@@ -27,7 +27,7 @@ import 'package:belksiri/ex/play_sound.dart';
 import 'package:belksiri/ex/process.dart';
 import 'package:belksiri/ex/registry.dart';
 import 'package:belksiri/ex/appcontainer.dart';
-import 'package:belksiri/ex/my_script.dart';
+import 'package:belksiri/ex/aa_script.dart';
 import 'package:belksiri/ex/screenshot.dart';
 import 'package:belksiri/ex/scroll.dart';
 import 'package:belksiri/ex/serial.dart';
@@ -42,6 +42,7 @@ import 'package:belksiri/ex/wasapi.dart';
 import 'package:belksiri/ex/wmi_perf.dart';
 import 'package:belksiri/ex/wmi_wql.dart';
 import 'package:belksiri/ex/wsl.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_auto_gui/flutter_auto_gui.dart';
 
@@ -312,9 +313,17 @@ class _MyAppState extends State<MyApp> {
                               ElevatedButton(
                                 onPressed: () async {
                                   MyScript script = MyScript();
-                                  script.findPowerPoint();
+                                  script.putForwardPowerPoint();
                                 },
-                                child: const Text('PowerPoint'),
+                                child: const Text('Start PowerPoint'),
+                              ),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  MyScript script = MyScript();
+                                  script.commandPowerPoint();
+                                },
+                                child: const Text('cmd PowerPoint'),
                               ),
 
                               ElevatedButton(

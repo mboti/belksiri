@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:flutter_auto_gui/flutter_auto_gui.dart';
+import 'package:flutter/material.dart';
 import 'package:win32/win32.dart';
 
 
@@ -8,6 +10,9 @@ import 'package:win32/win32.dart';
 
 
 class MyScript {
+
+  //List<>
+  static String  HWND = "";
 
   MyScript();
 
@@ -20,6 +25,7 @@ class MyScript {
     Sleep(1000);
 
     print('Sending the "A" key and the Unicode character "€".');
+    //"A"-----------------------------------------------------------------------
     final kbd = calloc<INPUT>();
     kbd.ref.type = INPUT_KEYBOARD;
     kbd.ref.ki.wVk = VK_A;
@@ -30,6 +36,7 @@ class MyScript {
     result = SendInput(1, kbd, sizeOf<INPUT>());
     if (result != TRUE) print('Error: ${GetLastError()}');
 
+    //"€"-----------------------------------------------------------------------
     kbd.ref.ki.wVk = 0;
     kbd.ref.ki.wScan = 0x20AC; // euro sign
     kbd.ref.ki.dwFlags = KEYEVENTF_UNICODE;
@@ -40,8 +47,10 @@ class MyScript {
     result = SendInput(1, kbd, sizeOf<INPUT>());
     if (result != TRUE) print('Error: ${GetLastError()}');
 
+    //liberer la mémoire
     free(kbd);
 
+    //right-click---------------------------------------------------------------
     print('Sending a right-click mouse event.');
     final mouse = calloc<INPUT>();
     mouse.ref.type = INPUT_MOUSE;
@@ -54,6 +63,7 @@ class MyScript {
     result = SendInput(1, mouse, sizeOf<INPUT>());
     if (result != TRUE) print('Error: ${GetLastError()}');
 
+    //liberer la mémoire
     free(mouse);
   }
 
@@ -74,6 +84,7 @@ class MyScript {
 
     final buffer = wsalloc(length + 1);
     GetWindowText(hWnd, buffer, length + 1);
+    String test = buffer.toDartString();
     print('hWnd $hWnd: ${buffer.toDartString()}');
     free(buffer);
 
@@ -109,21 +120,32 @@ class MyScript {
 
   //----------------------------------------------------------------------------
   /// Find the first open Notepad window and maximize it
-  void findPowerPoint() {
+  void putForwardPowerPoint() {
     //final hwnd =FindWindow(nullptr,TEXT('Présentation1 - PowerPoint'));
     //final hwnd =FindWindow(nullptr,TEXT("Outil Capture d’écran"));
-    int hwnd = 526250;
+    if(HWND==""){
+
+    }
+    int hwnd = 1574346;
 
     if (hwnd == 0) {
       print('No PowerPoint window found.');
     } else {
       SetForegroundWindow(hwnd);      // mettre fenêtre en avant
-      ShowWindow(hwnd, SW_MAXIMIZE);  // maximiser la fenetre
+      //ShowWindow(hwnd, SW_MAXIMIZE);  // maximiser la fenetre
       print('hwnd PowerPoint : $hwnd');
     }
     //ShowWindow(GetWindowDC(460606), SW_MAXIMIZE);
   }
 
+  void commandPowerPoint(){
+    enumerateWindows();
+    int hwnd = 1574346;
+    SetForegroundWindow(hwnd);
+    FlutterAutoGUI.hotkey(
+      keys: ['f1'],
+    );
+  }
 
 
 
