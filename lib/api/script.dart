@@ -11,8 +11,8 @@ import 'package:win32/win32.dart';
 
 class MyScript {
 
-  //List<>
-  static String  HWND = "";
+  static Map<int, String> mapHWND = {};
+  static int  myHWND = -1;
 
   MyScript();
 
@@ -72,6 +72,13 @@ class MyScript {
 
 
   //----------------------------------------------------------------------------
+  /// List the window handle and text for all top-level desktop windows
+  /// in the current session.
+  void enumerateWindows() {
+    final wndProc = Pointer.fromFunction<EnumWindowsProc>(enumWindowsProc, 0);
+    EnumWindows(wndProc, 0);
+  }
+
   // Callback for each window found
   static int enumWindowsProc(int hWnd, int lParam) {
     // Don't enumerate windows unless they are marked as WS_VISIBLE
@@ -84,20 +91,27 @@ class MyScript {
 
     final buffer = wsalloc(length + 1);
     GetWindowText(hWnd, buffer, length + 1);
-    String test = buffer.toDartString();
+    String test = (buffer.toDartString()).toLowerCase();
+    test = removeDiacritics(test);
+    test = test.replaceAll(RegExp(' '), '');
+    mapHWND[hWnd] = test;
     print('hWnd $hWnd: ${buffer.toDartString()}');
-    free(buffer);
 
+    free(buffer);
     return TRUE;
   }
 
-  /// List the window handle and text for all top-level desktop windows
-  /// in the current session.
-  void enumerateWindows() {
-    final wndProc = Pointer.fromFunction<EnumWindowsProc>(enumWindowsProc, 0);
+  //supprimer les signes diacritiques (accents) d'une chaîne
+  static String removeDiacritics(String str) {
+    var withDia = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
+    var withoutDia = 'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
 
-    EnumWindows(wndProc, 0);
+    for (int i = 0; i < withDia.length; i++) {
+      str = str.replaceAll(withDia[i], withoutDia[i]);
+    }
+    return str;
   }
+
 
   /// Find the first open Notepad window and maximize it
   void findNotepad() {
@@ -123,7 +137,7 @@ class MyScript {
   void putForwardPowerPoint() {
     //final hwnd =FindWindow(nullptr,TEXT('Présentation1 - PowerPoint'));
     //final hwnd =FindWindow(nullptr,TEXT("Outil Capture d’écran"));
-    if(HWND==""){
+    if(HWND==-1){
 
     }
     int hwnd = 1574346;
@@ -139,14 +153,30 @@ class MyScript {
   }
 
   void commandPowerPoint(){
+    // vider la liste pour ne pas avoir de doublons
+    mapHWND.clear();
     enumerateWindows();
-    int hwnd = 1574346;
-    SetForegroundWindow(hwnd);
+    print(mapHWND);
+    boucle();
+    SetForegroundWindow(myHWND);
     FlutterAutoGUI.hotkey(
       keys: ['f1'],
     );
   }
 
+  boucle(){
+    const string = 'Dart strings';
+    final containsD = string.contains('D'); // true
+
+    if(mapHWND.isNotEmpty){
+      mapHWND.forEach((key, value) {
+        print('$key: $value');
+        if(value.contains('power')){
+          myHWND = key;
+        }
+      });
+    }
+  }
 
 
 

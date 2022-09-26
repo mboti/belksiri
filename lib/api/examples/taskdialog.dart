@@ -16,7 +16,7 @@
 
 
 
-//      C:\Users\ymbi7301\AndroidStudioProjects\belksiri\lib\ex> dart compile exe taskdialog.dart
+//      C:\Users\ymbi7301\AndroidStudioProjects\belksiri\lib\api> dart compile exe taskdialog.dart
 
 
 import 'dart:ffi';

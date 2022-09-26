@@ -4,7 +4,7 @@
 
 
 
-// PS C:\Users\ymbi7301\AndroidStudioProjects\belksiri\lib\ex> dart compile exe update_resource.dart
+// PS C:\Users\ymbi7301\AndroidStudioProjects\belksiri\lib\api> dart compile exe update_resource.dart
 
 
 
